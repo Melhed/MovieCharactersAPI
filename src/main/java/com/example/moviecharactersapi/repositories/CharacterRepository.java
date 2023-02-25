@@ -34,13 +34,12 @@ public class CharacterRepository implements CRUDRepository<Character, Integer> {
             ResultSet result = statement.executeQuery();
 
             while(result.next()) {
-                Character character = new Character();
-                character.setId(result.getInt("character_id"));
-                character.setAlias(result.getString("character_alias"));
-                character.setGender(result.getString("character_gender"));
-                character.setName(result.getString("character_name"));
-                character.setPicture_url(result.getString("character_picture_url"));
-                characterList.add(character);
+                characterList.add(new Character(result.getInt("character_id"),
+                        result.getString("character_name"),
+                        result.getString("character_alias"),
+                        result.getString("character_gender"),
+                        result.getString("character_picture_url")
+                        ));
             }
 
         } catch (SQLException e) {
@@ -52,7 +51,30 @@ public class CharacterRepository implements CRUDRepository<Character, Integer> {
 
     @Override
     public Character findById(Integer id) {
-        return null;
+        if(id == null) return null;
+        Character character = null;
+        String sql = "SELECT character_id, character_alias, character_gender, character_name, character_picture_url FROM tb_character WHERE character_id = ?";
+
+        try(Connection conn = DriverManager.getConnection(url, username, password)) {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+
+            if(result.next()) {
+                character = new Character(
+                        result.getInt("character_id"),
+                        result.getString("character_name"),
+                        result.getString("character_alias"),
+                        result.getString("character_gender"),
+                        result.getString("character_picture_url")
+                );
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return character;
     }
 
     @Override

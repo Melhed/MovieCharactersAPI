@@ -1,6 +1,5 @@
 package com.example.moviecharactersapi.controllers;
 
-import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.services.CharacterService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +17,13 @@ public class CharacterController {
     }
 
     @GetMapping("all")
-    public ResponseEntity<Collection<Character>> findAllCharacters() {
+    public ResponseEntity<Collection<CharacterDTO>> findAllCharacters() {
         return ResponseEntity.ok(characterService.findAllCharacters());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<CharacterDTO> findCharacterById(@PathVariable Integer id) {
+        return ResponseEntity.ok(characterService.findCharacterById(id));
     }
 
 }
