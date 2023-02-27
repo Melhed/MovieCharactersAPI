@@ -7,7 +7,6 @@ import java.util.Set;
 @Entity
 @Table(name = "tb_character")
 public class Character {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "character_id")
@@ -28,4 +27,28 @@ public class Character {
     @ManyToMany(mappedBy = "characters")
     private Set<Movie> movies;
 
+
+    public Character(String name) {
+        this.name = name;
+    }
+
+    public Character() {
+
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -38,4 +38,14 @@ public class Movie {
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
 
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", genre='" + genre + '\'' +
+                ", release_year=" + release_year +
+                ", director='" + director + '\'' +
+                ", picture_url='" + picture_url + '\'' +
+                '}';
+    }
 }
