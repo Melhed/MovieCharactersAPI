@@ -1,5 +1,6 @@
 package com.example.moviecharactersapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -24,6 +25,7 @@ public class Character {
     @Column(name = "character_picture_url")
     private String picture_url;
 
+    //@JsonIgnore
     @ManyToMany(mappedBy = "characters")
     private Set<Movie> movies;
 
@@ -34,6 +36,28 @@ public class Character {
 
     public Character() {
 
+    }
+
+
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getPicture_url() {
+        return picture_url;
     }
 
     public Set<Movie> getMovies() {

@@ -4,11 +4,11 @@ import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.repositories.CharacterRepositories;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 
 public interface CharacterService extends CrudService<Character, Integer> {
-
 
 
     @Override
@@ -17,9 +17,7 @@ public interface CharacterService extends CrudService<Character, Integer> {
 
 
 
-
-
-   public Set<Character> findByNameContainsIgnoreCase(String name);
+    public Set<Character> findByNameContainsIgnoreCase(String name);
 
     @Override
     public Character findById(Integer id);
@@ -32,6 +30,7 @@ public interface CharacterService extends CrudService<Character, Integer> {
 
     @Override
     public Character update(Character entity);
+
     @Override
     public void delete(Character entity);
 
