@@ -1,12 +1,10 @@
 package com.example.moviecharactersapi.repositories;
 
-import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.models.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Repository

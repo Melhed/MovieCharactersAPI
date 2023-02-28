@@ -1,7 +1,6 @@
 package com.example.moviecharactersapi.services;
 
 import com.example.moviecharactersapi.mappers.MovieMapper;
-import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.Franchise;
 import com.example.moviecharactersapi.models.Movie;
 import com.example.moviecharactersapi.repositories.MovieRepository;
@@ -51,17 +50,20 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public Movie update(Movie movie) {
+        if(movie == null) return null;
         return movieRepository.save(movie);
     }
 
     @Override
-    public void deleteById(Integer integer) {
-
+    public void deleteById(Integer movieId) {
+        if(movieId == null) return;
+        movieRepository.deleteById(movieId);
     }
 
     @Override
-    public void delete(Movie entity) {
-
+    public void delete(Movie movie) {
+        if(movie == null) return;
+        movieRepository.delete(movie);
     }
 
 }
