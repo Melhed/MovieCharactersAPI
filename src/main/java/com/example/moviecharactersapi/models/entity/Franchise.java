@@ -1,4 +1,4 @@
-package com.example.moviecharactersapi.models;
+package com.example.moviecharactersapi.models.entity;
 
 import jakarta.persistence.*;
 

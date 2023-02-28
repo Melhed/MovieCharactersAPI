@@ -1,10 +1,18 @@
-package com.example.moviecharactersapi.models;
+package com.example.moviecharactersapi.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_movie")
 public class Movie {
@@ -33,7 +41,7 @@ public class Movie {
     private String movie_trailer_url;
 
     @ManyToMany
-    @JsonIgnore
+//    @JsonIgnore
     private Set<Character> characters;
 
     @ManyToOne

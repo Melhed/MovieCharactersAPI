@@ -2,7 +2,6 @@ package com.example.moviecharactersapi.runners;
 
 import com.example.moviecharactersapi.repositories.CharacterRepositories;
 import com.example.moviecharactersapi.services.CharacterService;
-import com.example.moviecharactersapi.models.Character;
 import jakarta.transaction.Transactional;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
