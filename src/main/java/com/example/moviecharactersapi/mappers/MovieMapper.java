@@ -6,9 +6,7 @@ import com.example.moviecharactersapi.models.Character;
 import com.example.moviecharactersapi.models.Movie;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.Named;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 import java.util.stream.Collectors;

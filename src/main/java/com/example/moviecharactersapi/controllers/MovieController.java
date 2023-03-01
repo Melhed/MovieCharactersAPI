@@ -105,29 +105,6 @@ public class MovieController {
         return ResponseEntity.ok(movieMapper.movieToMovieGetDTO(movieService.findById(id)));
     }
 
-    @Operation(summary = "Get movies in franchise by franchise ID")
-    @ApiResponses(
-            value = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Success",
-                            content = {
-                                    @Content(mediaType = "application/json",
-                                            schema = @Schema(implementation = MovieGetFromFranchiseDTO.class))}
-                    ),
-                    @ApiResponse(
-                            responseCode = "default",
-                            description = "Failed request",
-                            content = @Content
-                    )
-            }
-    )
-    @GetMapping("franchise/{id}")
-    public ResponseEntity<Set<MovieGetFromFranchiseDTO>> findMoviesByFranchiseId(@PathVariable Integer id) {
-        Set<MovieGetFromFranchiseDTO> movies = movieService.findMoviesByFranchiseId(id).stream().map(movieMapper::movieToMovieGetFromFranchiseDTO).collect(Collectors.toSet());
-        return ResponseEntity.ok(movies);
-    }
-
 // Make a method that takes in a set of character IDs
 // fetch the characters from tb_character
 // use updateMovieCharactersByMovieId / similar method below to update the characters

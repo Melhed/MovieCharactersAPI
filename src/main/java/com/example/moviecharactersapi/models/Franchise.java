@@ -25,12 +25,6 @@ public class Franchise {
     @Column(name = "franchise_description")
     private String description;
 
-    @JsonGetter("movies")
-    public Set<Integer> jsonGetMovies() {
-        if(movies == null) return null;
-        return movies.stream().map(movie -> movie.getId()).collect(Collectors.toSet());
-    }
-
     @OneToMany(mappedBy = "franchise")
     private Set<Movie> movies;
 

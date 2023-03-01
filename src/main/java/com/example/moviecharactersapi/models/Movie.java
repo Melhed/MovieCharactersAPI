@@ -38,6 +38,7 @@ public class Movie {
     @Column(name = "movie_trailer_url")
     private String trailer_url;
 
+    // Swap this out for DTO version once characters is present
     @JsonGetter("characters")
     public Set<Integer> jsonGetCharacters() {
         if(characters != null) {
