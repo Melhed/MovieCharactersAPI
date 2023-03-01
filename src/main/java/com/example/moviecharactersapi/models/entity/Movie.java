@@ -41,17 +41,6 @@ public class Movie {
     @Column(name = "movie_trailer_url")
     private String trailer_url;
 
-    // Swap this out for DTO version once characters is present
-    @JsonGetter("characters")
-    public Set<Integer> jsonGetCharacters() {
-        if(characters != null) {
-            Set<Integer> set = new HashSet<>();
-            characters.forEach(character -> set.add(character.getId()));
-            return set;
-        }
-        return null;
-    }
-
     @ManyToMany
     private Set<Character> characters;
 

@@ -33,7 +33,6 @@ public class Character {
     @Column(name = "character_picture_url")
     private String picture_url;
 
-    //@JsonIgnore
     @ManyToMany(mappedBy = "characters")
     private Set<Movie> movies;
 
