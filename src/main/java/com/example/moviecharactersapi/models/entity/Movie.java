@@ -2,10 +2,7 @@ package com.example.moviecharactersapi.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString
 @Table(name = "tb_movie")
 public class Movie {
 

@@ -16,7 +16,6 @@ public interface CharacterRepositories extends JpaRepository<Character, Integer>
 
     Optional<Set<Character>> findByNameContainsIgnoreCase(String name);
 
-
     @Transactional
     Optional<Character> findByid(Integer id);
 
@@ -24,23 +23,11 @@ public interface CharacterRepositories extends JpaRepository<Character, Integer>
 
 
 
-/*
-   default Optional<Set<Character>> findCharactersByMoviesContains(Integer id){
 
-
-
-       return null;
-   }
-*/
 
     Optional<Set<Character>> findByMoviesFranchiseId(Integer id);
 
 
-  //  Optional<Set<Character>> findCharactersByMovieID(Integer id);
-
-    // get all the characters
-
-//    List<Character> findAll();
 
 
 

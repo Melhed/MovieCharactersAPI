@@ -15,11 +15,7 @@ public class CharacterServiceImpl implements CharacterService {
 
     private final CharacterRepositories characterRepositories;
 
-/*
-    public CharacterServiceImpl(CharacterRepositories characterRepositories) {
-        this.characterRepositories = characterRepositories;
-    }
-*/
+
 
     @Override
     public Set<Character> findByNameContainsIgnoreCase(String name) {
@@ -36,8 +32,10 @@ public class CharacterServiceImpl implements CharacterService {
     @Override
     public Set<Character> findByFranchiseId(Integer id) {
 
-       return characterRepositories.findByMoviesFranchiseId(id).get();
+        return characterRepositories.findByMoviesFranchiseId(id).get();
     }
+
+
 
     @Override
     public Character findById(Integer id) {
@@ -61,13 +59,8 @@ public class CharacterServiceImpl implements CharacterService {
     public Character update(Character entity) {
 
 
-
-
-
-
         return characterRepositories.save(entity);
     }
-
 
 
     @Override
@@ -85,7 +78,7 @@ public class CharacterServiceImpl implements CharacterService {
             //then delete the character
 
             //note to self: Check noroff repo
-        }else {
+        } else {
             System.out.println("no professor exist with that id");
         }
 
