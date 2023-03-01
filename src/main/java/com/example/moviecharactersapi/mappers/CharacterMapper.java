@@ -1,5 +1,6 @@
-package com.example.moviecharactersapi.models.dto;
+package com.example.moviecharactersapi.mappers;
 
+import com.example.moviecharactersapi.models.dto.CharacterDTO;
 import com.example.moviecharactersapi.models.entity.Character;
 import com.example.moviecharactersapi.models.entity.Movie;
 import org.mapstruct.Mapper;

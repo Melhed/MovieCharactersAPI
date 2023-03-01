@@ -1,8 +1,8 @@
 package com.example.moviecharactersapi.services;
 
 import com.example.moviecharactersapi.mappers.MovieMapper;
-import com.example.moviecharactersapi.models.Franchise;
-import com.example.moviecharactersapi.models.Movie;
+import com.example.moviecharactersapi.models.entity.Franchise;
+import com.example.moviecharactersapi.models.entity.Movie;
 import com.example.moviecharactersapi.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 

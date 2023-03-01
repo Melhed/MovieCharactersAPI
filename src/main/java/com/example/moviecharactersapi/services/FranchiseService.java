@@ -1,6 +1,6 @@
 package com.example.moviecharactersapi.services;
 
-import com.example.moviecharactersapi.models.Franchise;
+import com.example.moviecharactersapi.models.entity.Franchise;
 
 import java.util.List;
 

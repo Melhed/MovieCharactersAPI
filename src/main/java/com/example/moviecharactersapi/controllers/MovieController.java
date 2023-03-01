@@ -1,11 +1,10 @@
 package com.example.moviecharactersapi.controllers;
 
-import com.example.moviecharactersapi.dto.MovieGetDTO;
-import com.example.moviecharactersapi.dto.MovieGetFromFranchiseDTO;
+import com.example.moviecharactersapi.models.dto.MovieGetDTO;
 import com.example.moviecharactersapi.mappers.MovieMapper;
-import com.example.moviecharactersapi.models.Character;
-import com.example.moviecharactersapi.models.Franchise;
-import com.example.moviecharactersapi.models.Movie;
+import com.example.moviecharactersapi.models.entity.Character;
+import com.example.moviecharactersapi.models.entity.Franchise;
+import com.example.moviecharactersapi.models.entity.Movie;
 import com.example.moviecharactersapi.services.MovieService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

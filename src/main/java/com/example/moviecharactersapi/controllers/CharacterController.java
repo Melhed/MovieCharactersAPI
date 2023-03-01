@@ -1,7 +1,7 @@
 package com.example.moviecharactersapi.controllers;
 
 import com.example.moviecharactersapi.models.dto.CharacterDTO;
-import com.example.moviecharactersapi.models.dto.CharacterMapper;
+import com.example.moviecharactersapi.mappers.CharacterMapper;
 import com.example.moviecharactersapi.models.entity.Character;
 import com.example.moviecharactersapi.services.CharacterService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -46,7 +45,7 @@ public class CharacterController {
     @ResponseStatus(value = HttpStatus.OK)
     @Operation(summary = "Get all characters")
     public List<CharacterDTO> getAllCharacters() {
-        List<Character> characterList = characterService.findAll();
+        List<Character> characterList = characterService.findAll().stream().toList();
         return characterList.stream().map(characterMapper::dtoToCharacter).toList();
     }
 

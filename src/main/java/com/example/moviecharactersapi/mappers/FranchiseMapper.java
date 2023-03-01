@@ -1,8 +1,8 @@
 package com.example.moviecharactersapi.mappers;
 
-import com.example.moviecharactersapi.dto.FranchiseDTO;
-import com.example.moviecharactersapi.models.Franchise;
-import com.example.moviecharactersapi.models.Movie;
+import com.example.moviecharactersapi.models.dto.FranchiseDTO;
+import com.example.moviecharactersapi.models.entity.Franchise;
+import com.example.moviecharactersapi.models.entity.Movie;
 import com.example.moviecharactersapi.services.MovieService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

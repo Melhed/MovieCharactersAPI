@@ -1,6 +1,6 @@
 package com.example.moviecharactersapi.repositories;
 
-import com.example.moviecharactersapi.models.Franchise;
+import com.example.moviecharactersapi.models.entity.Franchise;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

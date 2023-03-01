@@ -1,12 +1,11 @@
 package com.example.moviecharactersapi.controllers;
 
-import com.example.moviecharactersapi.dto.FranchiseDTO;
-import com.example.moviecharactersapi.dto.MovieGetDTO;
+import com.example.moviecharactersapi.models.dto.FranchiseDTO;
+import com.example.moviecharactersapi.models.dto.MovieGetDTO;
 import com.example.moviecharactersapi.mappers.FranchiseMapper;
 import com.example.moviecharactersapi.mappers.MovieMapper;
-import com.example.moviecharactersapi.models.Franchise;
+import com.example.moviecharactersapi.models.entity.Franchise;
 import com.example.moviecharactersapi.services.FranchiseService;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

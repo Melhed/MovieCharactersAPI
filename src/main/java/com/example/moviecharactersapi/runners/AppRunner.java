@@ -32,7 +32,5 @@ public class AppRunner implements ApplicationRunner {
         System.out.println(characterService.findByNameContainsIgnoreCase("sa"));
     }*/
 
-
-        System.out.println(characterService.findById(1));
     }
 }

@@ -1,11 +1,11 @@
-package com.example.moviecharactersapi.dto;
+package com.example.moviecharactersapi.models.dto;
 
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class MovieGetDTO {
+public class MovieGetFromFranchiseDTO {
 
     private int id;
     private String title;
@@ -15,6 +15,5 @@ public class MovieGetDTO {
     private String pictureUrl;
     private String trailerUrl;
     private List<Object> characterIds;
-    private int franchiseId;
 
 }

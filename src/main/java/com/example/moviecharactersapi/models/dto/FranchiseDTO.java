@@ -1,4 +1,4 @@
-package com.example.moviecharactersapi.dto;
+package com.example.moviecharactersapi.models.dto;
 
 import lombok.Data;
 

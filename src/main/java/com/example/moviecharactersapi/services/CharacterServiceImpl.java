@@ -90,4 +90,9 @@ public class CharacterServiceImpl implements CharacterService {
         }
 
     }
+
+    @Override
+    public void delete(Character entity) {
+
+    }
 }

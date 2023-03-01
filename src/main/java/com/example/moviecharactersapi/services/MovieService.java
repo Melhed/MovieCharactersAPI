@@ -1,8 +1,7 @@
 package com.example.moviecharactersapi.services;
 
-import com.example.moviecharactersapi.models.Character;
-import com.example.moviecharactersapi.models.Franchise;
-import com.example.moviecharactersapi.models.Movie;
+import com.example.moviecharactersapi.models.entity.Franchise;
+import com.example.moviecharactersapi.models.entity.Movie;
 
 import java.util.Set;
 

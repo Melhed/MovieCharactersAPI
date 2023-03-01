@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 
-public interface CharacterService extends CrudService<Character, Integer> {
+public interface CharacterService extends CRUDService<Character, Integer> {
 
 
 
