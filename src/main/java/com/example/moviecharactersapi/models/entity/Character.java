@@ -15,6 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "tb_character")
 public class Character {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "character_id")
@@ -35,8 +36,5 @@ public class Character {
     //@JsonIgnore
     @ManyToMany(mappedBy = "characters")
     private Set<Movie> movies;
-
-
-
 
 }

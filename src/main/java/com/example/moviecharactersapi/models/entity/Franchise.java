@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Setter
@@ -29,5 +30,11 @@ public class Franchise {
 
     @OneToMany(mappedBy = "franchise")
     private Set<Movie> movies;
+
+    public Franchise(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 
 }
