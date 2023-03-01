@@ -41,7 +41,6 @@ public class Movie {
     private String movie_trailer_url;
 
     @ManyToMany
-//    @JsonIgnore
     private Set<Character> characters;
 
     @ManyToOne
@@ -52,46 +51,6 @@ public class Movie {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
 
-    public String getGenre() {
-        return genre;
-    }
 
-    public int getRelease_year() {
-        return release_year;
-    }
-
-    public String getDirector() {
-        return director;
-    }
-
-    public String getPicture_url() {
-        return picture_url;
-    }
-
-    public String getMovie_trailer_url() {
-        return movie_trailer_url;
-    }
-
-    public Set<Character> getCharacters() {
-        return characters;
-    }
-
-    public Franchise getFranchise() {
-        return franchise;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "title='" + title + '\'' +
-                ", genre='" + genre + '\'' +
-                ", release_year=" + release_year +
-                ", director='" + director + '\'' +
-                ", picture_url='" + picture_url + '\'' +
-                '}';
-    }
 }

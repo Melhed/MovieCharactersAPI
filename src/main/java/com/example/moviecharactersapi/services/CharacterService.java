@@ -15,6 +15,9 @@ public interface CharacterService extends CrudService<Character, Integer> {
      Set<Character> findByNameContainsIgnoreCase(String name);
 
 
+     Set<Character> findByMovieId(Integer id);
+
+     Set<Character> findByFranchiseId(Integer id);
 
 
 }

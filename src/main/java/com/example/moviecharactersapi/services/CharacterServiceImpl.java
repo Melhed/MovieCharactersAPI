@@ -27,6 +27,19 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
+    public Set<Character> findByMovieId(Integer id) {
+
+        return characterRepositories.findByMoviesId(id).get();
+
+    }
+
+    @Override
+    public Set<Character> findByFranchiseId(Integer id) {
+
+       return characterRepositories.findByMoviesFranchiseId(id).get();
+    }
+
+    @Override
     public Character findById(Integer id) {
         return characterRepositories.findById(id).get();
     }

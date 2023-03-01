@@ -5,6 +5,11 @@ import com.example.moviecharactersapi.models.dto.CharacterMapper;
 import com.example.moviecharactersapi.models.entity.Character;
 import com.example.moviecharactersapi.services.CharacterService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +28,20 @@ public class CharacterController {
 
 
     private final CharacterService characterService;
-
     private final CharacterMapper characterMapper;
 
 
-
-
-
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Success",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = CharacterDTO.class)))}),
+            @ApiResponse(responseCode = "404",
+                    description = "Character does not exist with supplied ID",
+                    content = @Content),
+    })
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
     @Operation(summary = "Get all characters")
@@ -38,21 +50,36 @@ public class CharacterController {
         return characterList.stream().map(characterMapper::dtoToCharacter).toList();
     }
 
-/*
-    @Operation(summary = "Adds a new character to the database")
-    @PostMapping // POST: localhost:8080/api/v1/characters/add
 
-    public ResponseEntity<Character> add(@RequestBody Character character) {
-        Character newCharacter = characterService.add(character);
-
-        URI location = URI.create("characters/" + newCharacter.getId());
-        return ResponseEntity.created(location).build();
+    @Operation(summary = "Get Characters by movie ID")
+    @GetMapping("/movie/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public Set<CharacterDTO> getCharactersByMovieId(@PathVariable Integer id) {
+        Set<Character> characterList = characterService.findByMovieId(id);
+        return characterList.stream().map(characterMapper::dtoToCharacter).collect(Collectors.toSet());
     }
-*/
 
+    @Operation(summary = "Get Characters by franchise ID")
+    @GetMapping("/franchise/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public Set<CharacterDTO> getCharactersByFranchiseId(@PathVariable Integer id) {
+        Set<Character> characterList = characterService.findByFranchiseId(id);
+        return characterList.stream().map(characterMapper::dtoToCharacter).collect(Collectors.toSet());
+    }
+
+    @Operation(summary = "Get a character by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Success",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CharacterDTO.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "Character does not exist with supplied ID",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CharacterDTO.class))})
+    })
     @GetMapping("{id}") // GET: localhost:8080/api/v1/characters/1
     @ResponseStatus(value = HttpStatus.OK)
-    @Operation(summary = "Get a character by ID")
     public ResponseEntity getById(@PathVariable Integer id) {
         CharacterDTO character = characterMapper.dtoToCharacter(characterService.findById(id));
         return ResponseEntity.ok(character);
@@ -66,19 +93,8 @@ public class CharacterController {
         return characterList.stream().map(characterMapper::dtoToCharacter).collect(Collectors.toSet());
     }
 
-/*
-    @PostMapping("/add") // POST: localhost:8080/api/v1/characters/add
-    @ResponseStatus(value = HttpStatus.CREATED)
-    @Operation(summary = "Adds a new character to the database")
-    public CharacterDTO addCharacter(@RequestBody Character character) {
-        Character newCharacter = characterService.add(character);
-        return characterMapper.dtoToCharacter(newCharacter);
-    }
-*/
 
-
-
-    @Operation(summary = "Adds new Student")
+    @Operation(summary = "Adds new Character")
     @PostMapping // POST: localhost:8080/api/v1/characters
     public ResponseEntity add(@RequestBody CharacterDTO characterDTO) {
 
@@ -86,7 +102,7 @@ public class CharacterController {
         Character newCharacter = characterService.add(character);
         URI location = URI.create("characters/" + newCharacter.getId());
         return ResponseEntity.created(location).build();
-        // return ResponseEntity.status(HttpStatus.CREATED).build();
+
     }
 
     @DeleteMapping("{id}") // DELETE: localhost:8080/api/v1/characters/1
@@ -101,22 +117,14 @@ public class CharacterController {
     @Operation(summary = "Update a character by ID")
     public ResponseEntity updateById(@PathVariable Integer id, @RequestBody CharacterDTO characterDTO) {
 
-        if(id != characterDTO.getId()) {
+        if (id != characterDTO.getId()) {
             return ResponseEntity.badRequest().build();
         }
-
 
         characterService.update(characterMapper.toCharacter(characterDTO));
 
         return ResponseEntity.ok().build();
     }
 
-
-/*    @PostMapping // POST: localhost:8080/api/v1/characters/add
-    public CharacterDTO addCharacter(@RequestBody CharacterDTO characterDTO) {
-        Character character = characterMapper.toCharacter(characterDTO);
-        Character newCharacter = characterService.add(character);
-        return characterMapper.dtoToCharacter(newCharacter);
-    }*/
 
 }
