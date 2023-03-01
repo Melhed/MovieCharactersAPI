@@ -1,10 +1,18 @@
-package com.example.moviecharactersapi.models;
+package com.example.moviecharactersapi.models.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_franchise")
 public class Franchise {
 
