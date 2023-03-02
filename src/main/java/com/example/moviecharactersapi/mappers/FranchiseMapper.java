@@ -25,15 +25,15 @@ public abstract class FranchiseMapper {
     public abstract FranchiseDTO franchiseToFranchiseDTO(Franchise franchise);
 
     @Named("movieIdsToMovies")
-    Set<Movie> map(List<Integer> movieIds) {
+    Set<Movie> mapMovies(Set<Integer> movieIds) {
         if(movieIds == null) return null;
         return movieIds.stream().map(movieId -> movieService.findById(movieId)).collect(Collectors.toSet());
     }
 
     @Named("moviesToMovieIds")
-    List<Integer> map(Set<Movie> movies) {
+    Set<Integer> mapIds(Set<Movie> movies) {
         if(movies == null) return null;
-        return movies.stream().map(movie -> movie.getId()).collect(Collectors.toList());
+        return movies.stream().map(movie -> movie.getId()).collect(Collectors.toSet());
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.moviecharactersapi.controllers;
 import com.example.moviecharactersapi.models.dto.CharacterDTO;
 import com.example.moviecharactersapi.mappers.CharacterMapper;
 import com.example.moviecharactersapi.models.entity.Character;
+import com.example.moviecharactersapi.models.entity.Movie;
 import com.example.moviecharactersapi.services.CharacterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -198,6 +199,5 @@ public class CharacterController {
 
         return ResponseEntity.ok().build();
     }
-
 
 }

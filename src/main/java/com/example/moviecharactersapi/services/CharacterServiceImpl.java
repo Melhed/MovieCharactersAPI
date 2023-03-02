@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class CharacterServiceImpl implements CharacterService {
 
     private final CharacterRepositories characterRepositories;
+
 
     private final MovieService movieService;
 
@@ -23,6 +24,7 @@ public class CharacterServiceImpl implements CharacterService {
      * @param name
      * @return Set of Characters
      */
+
     @Override
     public Set<Character> findByNameContainsIgnoreCase(String name) {
         return characterRepositories.findByNameContainsIgnoreCase(name).get();

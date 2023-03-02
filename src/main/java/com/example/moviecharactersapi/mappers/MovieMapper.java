@@ -4,48 +4,43 @@ import com.example.moviecharactersapi.models.dto.MovieGetDTO;
 import com.example.moviecharactersapi.models.dto.MovieGetFromFranchiseDTO;
 import com.example.moviecharactersapi.models.entity.Character;
 import com.example.moviecharactersapi.models.entity.Movie;
+import com.example.moviecharactersapi.services.CharacterService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
-public interface MovieMapper {
-    @Mapping(target = "director", source = "director")
-    @Mapping(target = "releaseYear", source = "release_year")
-    @Mapping(target = "pictureUrl", source = "picture_url")
-    @Mapping(target = "trailerUrl", source = "trailer_url")
-    @Mapping(target = "franchiseId", source = "franchise.id")
-    @Mapping(target = "characterIds", source = "characters", qualifiedByName = "charactersToCharacterIds")
-    MovieGetDTO movieToMovieGetDTO(Movie movie);
+public abstract class MovieMapper {
 
-//    @Mapping(target = "characters", source = "characterIds", qualifiedByName = "characterIdsToCharacters")
-    Movie toMovie(MovieGetDTO movieGetDTO);
+    @Autowired
+    private CharacterService characterService;
 
     @Mapping(target = "director", source = "director")
-    @Mapping(target = "releaseYear", source = "release_year")
-    @Mapping(target = "pictureUrl", source = "picture_url")
-    @Mapping(target = "trailerUrl", source = "trailer_url")
     @Mapping(target = "characterIds", source = "characters", qualifiedByName = "charactersToCharacterIds")
-    MovieGetFromFranchiseDTO movieToMovieGetFromFranchiseDTO(Movie movie);
+    public abstract MovieGetDTO movieToMovieGetDTO(Movie movie);
 
-    // Implement below methods once CharacterService has been added.
-//    @Named("characterIdsToCharacters")
-//    default Set<Character> mapCharacterIdsToCharacters(Integer id) {
-//        return null;
-//    }
-//    default Character mapCharacterIdToCharacter(Integer id) {
-//        return null;
-//    }
+    @Mapping(target = "characters", source = "characterIds", qualifiedByName = "characterIdsToCharacters")
+    public abstract Movie toMovie(MovieGetDTO movieGetDTO);
 
-    @Named("charactersToCharacterIds")
-    default List<Object> map(Set<Character> source) {
-        if(source == null) return null;
-        return source.stream().map(character -> new idRecord(character.getId())).collect(Collectors.toList());
+    @Mapping(target = "director", source = "director")
+    @Mapping(target = "characterIds", source = "characters", qualifiedByName = "charactersToCharacterIds")
+    public abstract MovieGetFromFranchiseDTO movieToMovieGetFromFranchiseDTO(Movie movie);
+
+    @Named("characterIdsToCharacters")
+    public Set<Character> mapCharacters(Set<Integer> movieIds) {
+        if(movieIds == null) return null;
+        return movieIds.stream().map(movieId -> characterService.findById(movieId)).collect(Collectors.toSet());
     }
 
-    record idRecord(Integer id){};
+    @Named("charactersToCharacterIds")
+    public Set<Integer> mapIds(Set<Character> source) {
+        if(source == null) return null;
+        return source.stream().map(character -> character.getId()).collect(Collectors.toSet());
+    }
+
 
 }
