@@ -1,13 +1,8 @@
 package com.example.moviecharactersapi.models.entity;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Setter
@@ -39,6 +34,7 @@ public class Movie {
     private String pictureUrl;
 
     @Column(name = "movie_trailer_url")
+
     private String trailerUrl;
 
     @ManyToMany

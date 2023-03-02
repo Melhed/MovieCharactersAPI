@@ -1,6 +1,8 @@
 package com.example.moviecharactersapi.runners;
 
-import com.example.moviecharactersapi.models.entity.Movie;
+
+import com.example.moviecharactersapi.mappers.CharacterMapper;
+
 import com.example.moviecharactersapi.repositories.CharacterRepositories;
 import com.example.moviecharactersapi.services.CharacterService;
 import com.example.moviecharactersapi.services.MovieService;
@@ -12,23 +14,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppRunner implements ApplicationRunner {
 
-
     private final CharacterService characterService;
     private final MovieService movieService;
 
+    private final CharacterMapper characterMapper;
 
-    public AppRunner(CharacterRepositories characterRepositories, CharacterService characterService, MovieService movieService) {
+
+    public AppRunner(CharacterRepositories characterRepositories, CharacterService characterService, CharacterMapper characterMapper) {
 
         this.characterService = characterService;
-        this.movieService = movieService;
-    }
+        this.characterMapper = characterMapper;
 
+    }
 
     @Override
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
-
-
 
     }
 }
