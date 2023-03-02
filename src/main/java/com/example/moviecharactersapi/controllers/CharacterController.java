@@ -2,12 +2,9 @@ package com.example.moviecharactersapi.controllers;
 
 import com.example.moviecharactersapi.models.dto.CharacterDTO;
 import com.example.moviecharactersapi.mappers.CharacterMapper;
-import com.example.moviecharactersapi.models.dto.MovieGetDTO;
 import com.example.moviecharactersapi.models.entity.Character;
-import com.example.moviecharactersapi.models.entity.Movie;
 import com.example.moviecharactersapi.services.CharacterService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -58,8 +55,8 @@ public class CharacterController {
             @ApiResponse(responseCode = "200",
                     description = "Success",
                     content = {
-                    @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CharacterDTO.class))}),
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = CharacterDTO.class))}),
             @ApiResponse(responseCode = "404",
                     description = "failed request    ",
                     content = @Content),
@@ -163,6 +160,21 @@ public class CharacterController {
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "Delete a Character")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Success",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CharacterDTO.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "failed request",
+                    content = @Content)
+    })
+    @DeleteMapping // DELETE: localhost:8080/api/v1/characters
+    public ResponseEntity delete(@RequestBody CharacterDTO characterDTO) {
+        characterService.delete(characterMapper.toCharacter(characterDTO));
+        return ResponseEntity.ok().build();
+    }
 
     @Operation(summary = "Update a character by ID")
     @ApiResponses(value = {
