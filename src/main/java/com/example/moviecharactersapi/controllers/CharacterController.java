@@ -46,7 +46,7 @@ public class CharacterController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<CharacterDTO> getAllCharacters() {
         List<Character> characterList = characterService.findAll().stream().toList();
-        return characterList.stream().map(characterMapper::dtoToCharacter).toList();
+        return characterList.stream().map(characterMapper::characterToCharacterDTO).toList();
     }
 
 
@@ -65,7 +65,7 @@ public class CharacterController {
     @ResponseStatus(value = HttpStatus.OK)
     public Set<CharacterDTO> getCharactersByMovieId(@PathVariable Integer id) {
         Set<Character> characterList = characterService.findByMovieId(id);
-        return characterList.stream().map(characterMapper::dtoToCharacter).collect(Collectors.toSet());
+        return characterList.stream().map(characterMapper::characterToCharacterDTO).collect(Collectors.toSet());
     }
 
     @Operation(summary = "Get Characters by franchise ID")
@@ -83,7 +83,7 @@ public class CharacterController {
     @ResponseStatus(value = HttpStatus.OK)
     public Set<CharacterDTO> getCharactersByFranchiseId(@PathVariable Integer id) {
         Set<Character> characterList = characterService.findByFranchiseId(id);
-        return characterList.stream().map(characterMapper::dtoToCharacter).collect(Collectors.toSet());
+        return characterList.stream().map(characterMapper::characterToCharacterDTO).collect(Collectors.toSet());
     }
 
     @Operation(summary = "Get a character by ID")
@@ -92,15 +92,16 @@ public class CharacterController {
                     description = "Success",
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = CharacterDTO.class))}),
-            @ApiResponse(responseCode = "404",
+            @ApiResponse(responseCode = "default",
                     description = "Character does not exist with supplied ID",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = CharacterDTO.class))})
+                            schema = @Schema(implementation = CharacterDTO.class))}),
+
     })
     @GetMapping("{id}") // GET: localhost:8080/api/v1/characters/1
     @ResponseStatus(value = HttpStatus.OK)
     public ResponseEntity getById(@PathVariable Integer id) {
-        CharacterDTO character = characterMapper.dtoToCharacter(characterService.findById(id));
+        CharacterDTO character = characterMapper.characterToCharacterDTO(characterService.findById(id));
         return ResponseEntity.ok(character);
     }
 
@@ -119,7 +120,7 @@ public class CharacterController {
     @ResponseStatus(value = HttpStatus.OK)
     public Set<CharacterDTO> getByName(@PathVariable String name) {
         Set<Character> characterList = characterService.findByNameContainsIgnoreCase(name);
-        return characterList.stream().map(characterMapper::dtoToCharacter).collect(Collectors.toSet());
+        return characterList.stream().map(characterMapper::characterToCharacterDTO).collect(Collectors.toSet());
     }
 
 

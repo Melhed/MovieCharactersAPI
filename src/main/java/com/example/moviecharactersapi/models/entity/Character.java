@@ -10,7 +10,6 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Table(name = "tb_character")
 public class Character {
 
@@ -31,7 +30,6 @@ public class Character {
     @Column(name = "character_picture_url")
     private String picture_url;
 
-    //@JsonIgnore
     @ManyToMany(mappedBy = "characters")
     private Set<Movie> movies;
 

@@ -1,10 +1,8 @@
 package com.example.moviecharactersapi.models.entity;
 
-import com.fasterxml.jackson.annotation.JsonGetter;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @Setter
@@ -12,7 +10,6 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@ToString
 @Table(name = "tb_movie")
 public class Movie {
 
@@ -39,16 +36,6 @@ public class Movie {
     @Column(name = "movie_trailer_url")
     private String trailer_url;
 
-    // Swap this out for DTO version once characters is present
-    @JsonGetter("characters")
-    public Set<Integer> jsonGetCharacters() {
-        if(characters != null) {
-            Set<Integer> set = new HashSet<>();
-            characters.forEach(character -> set.add(character.getId()));
-            return set;
-        }
-        return null;
-    }
 
     @ManyToMany
     private Set<Character> characters;

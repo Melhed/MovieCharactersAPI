@@ -1,6 +1,5 @@
 package com.example.moviecharactersapi.services;
 
-import com.example.moviecharactersapi.exceptions.CharacterNotFoundException;
 import com.example.moviecharactersapi.models.entity.Character;
 import com.example.moviecharactersapi.repositories.CharacterRepositories;
 import lombok.RequiredArgsConstructor;
@@ -59,8 +58,8 @@ public class CharacterServiceImpl implements CharacterService {
      */
     @Override
     public Character findById(Integer id) {
-        return characterRepositories.findById(id)
-                .orElseThrow(() -> new CharacterNotFoundException(id));
+        return characterRepositories.findById(id).get();
+
     }
 
     /**
