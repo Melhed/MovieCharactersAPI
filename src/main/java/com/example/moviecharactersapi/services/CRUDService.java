@@ -9,4 +9,5 @@ public interface CRUDService <T, ID> {
     T update(T entity);
     void deleteById(ID id);
     void delete(T entity);
+
 }

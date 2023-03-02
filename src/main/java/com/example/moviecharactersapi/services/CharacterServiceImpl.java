@@ -1,5 +1,6 @@
 package com.example.moviecharactersapi.services;
 
+import com.example.moviecharactersapi.exceptions.CharacterNotFoundException;
 import com.example.moviecharactersapi.models.entity.Character;
 import com.example.moviecharactersapi.repositories.CharacterRepositories;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ public class CharacterServiceImpl implements CharacterService {
 
     private final CharacterRepositories characterRepositories;
 
+    private final MovieService movieService;
 
 
     @Override
@@ -36,10 +38,10 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
 
-
     @Override
     public Character findById(Integer id) {
-        return characterRepositories.findById(id).get();
+        return characterRepositories.findById(id)
+                .orElseThrow(() -> new CharacterNotFoundException(id));
     }
 
     @Override
@@ -67,17 +69,22 @@ public class CharacterServiceImpl implements CharacterService {
     public void deleteById(Integer id) {
 
         if (characterRepositories.existsById(id)) {
-            Character character = characterRepositories.findByid(id).get();
+            Character character = characterRepositories.findById(id).get();
 
-            character.getMovies().forEach(s -> s.setCharacters(null));
+            character.getMovies().forEach(movie -> {
+
+                Set<Character> characters = movie.getCharacters();
+
+                characters.remove(character);
+
+                movie.setCharacters(characters);
+
+                movieService.update(movie);
+
+            });
 
             characterRepositories.delete(character);
 
-            //first check if the character has a movie
-            //if it does, delete the movie first
-            //then delete the character
-
-            //note to self: Check noroff repo
         } else {
             System.out.println("no professor exist with that id");
         }
