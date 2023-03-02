@@ -1,21 +1,21 @@
 package com.example.moviecharactersapi.services;
 
 import com.example.moviecharactersapi.models.entity.Character;
+import com.example.moviecharactersapi.models.entity.Movie;
 import com.example.moviecharactersapi.repositories.CharacterRepositories;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
-@RequiredArgsConstructor
 @Service
 public class CharacterServiceImpl implements CharacterService {
 
     private final CharacterRepositories characterRepositories;
 
-
-    private final MovieService movieService;
+    public CharacterServiceImpl(CharacterRepositories characterRepositories) {
+        this.characterRepositories = characterRepositories;
+    }
 
 
     /**
@@ -106,18 +106,11 @@ public class CharacterServiceImpl implements CharacterService {
 
         if (characterRepositories.existsById(id)) {
             Character character = characterRepositories.findById(id).get();
+            Set<Movie> characterMovies = character.getMovies();
 
-            character.getMovies().forEach(movie -> {
-
-                Set<Character> characters = movie.getCharacters();
-
-                characters.remove(character);
-
-                movie.setCharacters(characters);
-
-                movieService.update(movie);
-
-            });
+            for(Movie movie : characterMovies) {
+                movie.getCharacters().remove(character);
+            }
 
             characterRepositories.delete(character);
 

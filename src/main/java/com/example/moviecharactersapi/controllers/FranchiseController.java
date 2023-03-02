@@ -130,7 +130,7 @@ public class FranchiseController {
 
         return ResponseEntity.ok(
                 characters.stream()
-                .map(character -> characterMapper.dtoToCharacter(character))
+                .map(character -> characterMapper.characterToCharacterDTO(character))
                 .collect(Collectors.toSet())
         );
     }

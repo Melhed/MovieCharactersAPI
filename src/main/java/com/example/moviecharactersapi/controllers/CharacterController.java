@@ -3,14 +3,12 @@ package com.example.moviecharactersapi.controllers;
 import com.example.moviecharactersapi.models.dto.CharacterDTO;
 import com.example.moviecharactersapi.mappers.CharacterMapper;
 import com.example.moviecharactersapi.models.entity.Character;
-import com.example.moviecharactersapi.models.entity.Movie;
 import com.example.moviecharactersapi.services.CharacterService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +19,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping(path = "api/v1/characters")
 public class CharacterController {
 
 
     private final CharacterService characterService;
     private final CharacterMapper characterMapper;
+
+    public CharacterController(CharacterService characterService, CharacterMapper characterMapper) {
+        this.characterService = characterService;
+        this.characterMapper = characterMapper;
+    }
 
 
     @Operation(summary = "Get all characters")

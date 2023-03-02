@@ -14,16 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppRunner implements ApplicationRunner {
 
-    private final CharacterService characterService;
-    private final MovieService movieService;
 
-    private final CharacterMapper characterMapper;
-
-
-    public AppRunner(CharacterRepositories characterRepositories, CharacterService characterService, CharacterMapper characterMapper) {
-
-        this.characterService = characterService;
-        this.characterMapper = characterMapper;
+    public AppRunner() {
 
     }
 

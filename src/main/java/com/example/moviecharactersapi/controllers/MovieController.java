@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -178,7 +179,7 @@ public class MovieController {
     @GetMapping("{movieId}/characters")
     public ResponseEntity<Collection<CharacterDTO>> getCharactersByMovieId(@PathVariable int movieId) {
         Movie movie = movieService.findById(movieId);
-        return ResponseEntity.ok(movie.getCharacters().stream().map(character -> characterMapper.dtoToCharacter(character)).collect(Collectors.toList()));
+        return ResponseEntity.ok(movie.getCharacters().stream().map(character -> characterMapper.characterToCharacterDTO(character)).collect(Collectors.toList()));
     }
 
     @Operation(summary = "Update movie's franchise by movie ID")
