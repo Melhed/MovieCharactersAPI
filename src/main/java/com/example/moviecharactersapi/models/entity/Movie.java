@@ -30,16 +30,16 @@ public class Movie {
     private String genre;
 
     @Column(name = "movie_release_year", nullable = false)
-    private int release_year;
+    private int releaseYear;
 
     @Column(name = "movie_director", length = 100)
     private String director;
 
     @Column(name = "movie_picture_url")
-    private String picture_url;
+    private String pictureUrl;
 
     @Column(name = "movie_trailer_url")
-    private String trailer_url;
+    private String trailerUrl;
 
     @ManyToMany
     private Set<Character> characters;
@@ -47,5 +47,14 @@ public class Movie {
     @ManyToOne
     @JoinColumn(name = "franchise_id")
     private Franchise franchise;
+
+    public Movie(String title, String genre, int releaseYear, String director, String pictureUrl, String trailerUrl) {
+        this.title = title;
+        this.genre = genre;
+        this.releaseYear = releaseYear;
+        this.director = director;
+        this.pictureUrl = pictureUrl;
+        this.trailerUrl = trailerUrl;
+    }
 
 }

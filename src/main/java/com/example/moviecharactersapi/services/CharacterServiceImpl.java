@@ -9,17 +9,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class CharacterServiceImpl implements CharacterService {
 
     private final CharacterRepositories characterRepositories;
-
-/*
-    public CharacterServiceImpl(CharacterRepositories characterRepositories) {
-        this.characterRepositories = characterRepositories;
-    }
-*/
 
     @Override
     public Set<Character> findByNameContainsIgnoreCase(String name) {

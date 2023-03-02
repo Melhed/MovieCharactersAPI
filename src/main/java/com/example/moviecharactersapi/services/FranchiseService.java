@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface FranchiseService extends CRUDService<Franchise, Integer>{
 
-    Franchise updateMoviesInFranchise(int franchiseId, List<Integer> movieIds);
+    Franchise updateMoviesInFranchise(Integer franchiseId, List<Integer> movieIds);
+    boolean franchiseExistsById(Integer franchiseId);
 
 }

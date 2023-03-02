@@ -4,6 +4,7 @@ import com.example.moviecharactersapi.mappers.FranchiseMapper;
 import com.example.moviecharactersapi.models.entity.Franchise;
 import com.example.moviecharactersapi.models.entity.Movie;
 import com.example.moviecharactersapi.repositories.FranchiseRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -11,17 +12,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class FranchiseServiceImpl implements FranchiseService{
     private final FranchiseRepository franchiseRepository;
     private final FranchiseMapper franchiseMapper;
     private final MovieService movieService;
-
-    public FranchiseServiceImpl(FranchiseRepository franchiseRepository, FranchiseMapper franchiseMapper, MovieService movieService) {
-        this.franchiseRepository = franchiseRepository;
-        this.franchiseMapper = franchiseMapper;
-        this.movieService = movieService;
-    }
 
     /**
      * Gets franchise based on ID
@@ -72,7 +68,7 @@ public class FranchiseServiceImpl implements FranchiseService{
      * @return              updated franchise
      */
     @Override
-    public Franchise updateMoviesInFranchise(int franchiseId, List<Integer> movieIds) {
+    public Franchise updateMoviesInFranchise(Integer franchiseId, List<Integer> movieIds) {
         if(movieIds == null) return null;
         Franchise franchise = franchiseRepository.findById(franchiseId).get();
         Set<Movie> franchiseMovies = franchise.getMovies();
@@ -96,6 +92,16 @@ public class FranchiseServiceImpl implements FranchiseService{
 
         franchise.setMovies(moviesToAdd);
         return franchiseRepository.save(franchise);
+    }
+
+    /**
+     * Checks if franchise exists by ID
+     * @param   franchiseId ID of franchise
+     * @return              boolean indicating if franchise exists
+     */
+    @Override
+    public boolean franchiseExistsById(Integer franchiseId) {
+        return franchiseRepository.existsById(franchiseId);
     }
 
     /**

@@ -5,6 +5,7 @@ import com.example.moviecharactersapi.models.entity.Character;
 import com.example.moviecharactersapi.models.entity.Franchise;
 import com.example.moviecharactersapi.models.entity.Movie;
 import com.example.moviecharactersapi.repositories.MovieRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -12,18 +13,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class MovieServiceImpl implements MovieService{
 
     private final MovieRepository movieRepository;
     private final MovieMapper movieMapper;
     private final CharacterService characterService;
-
-    public MovieServiceImpl(MovieRepository movieRepository, MovieMapper movieMapper, CharacterServiceImpl characterService) {
-        this.movieRepository = movieRepository;
-        this.movieMapper = movieMapper;
-        this.characterService = characterService;
-    }
 
     /**
      * Gets movie based on ID
@@ -90,13 +86,23 @@ public class MovieServiceImpl implements MovieService{
     }
 
     /**
+     * Checks if movie exists by ID
+     * @param   movieId     ID of movie
+     * @return              boolean indicating if movie exists
+     */
+    @Override
+    public boolean movieExistsById(Integer movieId) {
+        return movieRepository.existsById(movieId);
+    }
+
+    /**
      * Updates characters in movie
      * @param   movieId         ID of movie to be updated
      * @param   characterIds    IDs of characters
      * @return                  updated movie
      */
     @Override
-    public Movie updateCharactersInMovie(int movieId, List<Integer> characterIds) {
+    public Movie updateCharactersInMovie(Integer movieId, List<Integer> characterIds) {
         Movie movie = movieRepository.findById(movieId).get();
         Set<Character> charactersToAdd = characterIds.stream().map(characterId -> characterService.findById(characterId)).collect(Collectors.toSet());
         movie.setCharacters(charactersToAdd);
@@ -128,8 +134,8 @@ public class MovieServiceImpl implements MovieService{
     public void deleteById(Integer movieId) {
         if(movieId == null) return;
         Movie movie = movieRepository.findById(movieId).get();
-
         Set<Character> characters = movie.getCharacters();
+
         for (Character character : characters) {
             Set<Movie> characterMovies = character.getMovies();
             characterMovies.remove(movie);

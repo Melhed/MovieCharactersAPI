@@ -10,7 +10,8 @@ import java.util.Set;
 public interface MovieService extends CRUDService<Movie, Integer> {
 
     Set<Movie> findMoviesInFranchise(Integer franchiseId);
-    Movie updateCharactersInMovie(int movieId, List<Integer> characterIds);
+    Movie updateCharactersInMovie(Integer movieId, List<Integer> characterIds);
     Movie updateFranchiseInMovie(Integer movieId, Franchise franchise);
+    boolean movieExistsById(Integer movieId);
 
 }

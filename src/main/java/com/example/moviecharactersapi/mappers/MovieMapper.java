@@ -20,35 +20,27 @@ public abstract class MovieMapper {
     private CharacterService characterService;
 
     @Mapping(target = "director", source = "director")
-    @Mapping(target = "releaseYear", source = "release_year")
-    @Mapping(target = "pictureUrl", source = "picture_url")
-    @Mapping(target = "trailerUrl", source = "trailer_url")
-    @Mapping(target = "franchiseId", source = "franchise.id")
     @Mapping(target = "characterIds", source = "characters", qualifiedByName = "charactersToCharacterIds")
     public abstract MovieGetDTO movieToMovieGetDTO(Movie movie);
 
-//    @Mapping(target = "characters", source = "characterIds", qualifiedByName = "characterIdsToCharacters")
+    @Mapping(target = "characters", source = "characterIds", qualifiedByName = "characterIdsToCharacters")
     public abstract Movie toMovie(MovieGetDTO movieGetDTO);
 
     @Mapping(target = "director", source = "director")
-    @Mapping(target = "releaseYear", source = "release_year")
-    @Mapping(target = "pictureUrl", source = "picture_url")
-    @Mapping(target = "trailerUrl", source = "trailer_url")
     @Mapping(target = "characterIds", source = "characters", qualifiedByName = "charactersToCharacterIds")
     public abstract MovieGetFromFranchiseDTO movieToMovieGetFromFranchiseDTO(Movie movie);
 
     @Named("characterIdsToCharacters")
-    public List<Character> map(List<idRecord> movieIds) {
+    public Set<Character> mapCharacters(Set<Integer> movieIds) {
         if(movieIds == null) return null;
-        return movieIds.stream().map(entry -> characterService.findById(entry.id())).collect(Collectors.toList());
+        return movieIds.stream().map(movieId -> characterService.findById(movieId)).collect(Collectors.toSet());
     }
 
     @Named("charactersToCharacterIds")
-    public List<idRecord> map(Set<Character> source) {
+    public Set<Integer> mapIds(Set<Character> source) {
         if(source == null) return null;
-        return source.stream().map(character -> new idRecord(character.getId())).collect(Collectors.toList());
+        return source.stream().map(character -> character.getId()).collect(Collectors.toSet());
     }
 
-    public record idRecord(Integer id){};
 
 }
