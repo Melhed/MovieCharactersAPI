@@ -52,7 +52,7 @@ public abstract class MovieMapper {
     @Named("charactersToCharacterIds")
     public Set<Integer> mapCharactersToCharacterIds(Set<Character> source) {
         if(source == null) return null;
-        return source.stream().map(character -> character.getId()).collect(Collectors.toSet());
+        return source.stream().map(Character::getId).collect(Collectors.toSet());
     }
 
 
